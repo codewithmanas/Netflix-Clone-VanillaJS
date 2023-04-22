@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+/* font-family: 'Open Sans', sans-serif; */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --netflix-color: #DF0712;
+}
+
+/* resets */
+ul {
+    list-style: none;
+}
+
+/* utility class */
+/* .container {
+    width: 90%;
+} */
+body, html {
+    font-family: 'Open Sans', sans-serif;
+    background-color: black;
+    color: #fff;
+}
+
+header {
+    width: 100%;
+    background-color: transparent;
+    display: grid;
+    place-items: center;
+}
+
+.container {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-cont {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.left-cont img {
+    width: 100px;
+    object-fit: contain;
+}
+
+#main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.right-cont {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.right-cont img {
+    width: 40px;
+}
+
+
+
+
