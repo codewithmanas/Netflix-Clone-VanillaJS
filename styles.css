@@ -18,9 +18,9 @@ ul {
 }
 
 /* utility class */
-/* .container {
-    width: 90%;
-} */
+.container {
+    width: 95%;
+}
 body, html {
     font-family: 'Open Sans', sans-serif;
     background-color: black;
@@ -34,8 +34,7 @@ header {
     place-items: center;
 }
 
-.container {
-    width: 95%;
+.header-cont {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -53,11 +52,16 @@ header {
     object-fit: contain;
 }
 
-#main-nav {
+.main-nav {
+    color: #B3B1B5;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+}
+
+.nav-item.active {
+    color: #fff;
 }
 
 .right-cont {
@@ -71,6 +75,14 @@ header {
     width: 40px;
 }
 
+
+/* RESPONSIVE CSS */
+
+@media only screen and (max-width: 767px){
+    .main-nav {
+        display: none;
+    }
+}
 
 
 
