@@ -1,22 +1,40 @@
 // constants
-// const apiKey = "";
-// const baseUrl = "";
-const apiCallUrl = `https://api.themoviedb.org/3/trending/all/day?api_key=f4ab855768919f903a1dbec7381fa877`;
+const apiKey = "f4ab855768919f903a1dbec7381fa877";
+const apiEndPoint = "https://api.themoviedb.org/3";
+const apiCallUrl = `${apiEndPoint}/trending/all/day?api_key=${apiKey}`;
+
+const apiPaths = {
+    fetchAllTrendingMovies: `${apiEndPoint}/trending/movie/day?api_key=${apiKey}`,
+    fetchAllCategories: `${apiEndPoint}/genre/movie/list?api_key=${apiKey}`,
+}
 
 
 // Boot up the app
 function init() {
-    // console.log("App is loaded.");
-    fetch(apiCallUrl)
+
+    fetchAndBuildAllSections();
+}
+
+// function buildAllTrendingMoviesSection(data){
+//         const movieSection = document.querySelector(".movie-section");
+//         movieSection.innerHTML = data.results[0].title;
+// }
+
+function fetchAndBuildAllSections(){
+    fetch(apiPaths.fetchAllCategories)
     .then(res => res.json())
     .then(data => {
-        const finalData = data.results; 
-        finalData.forEach((item) => {
-            console.log(item.title)
-        })
-        console.log(data.results[3].title)
+        const categories = data.genres;
+        if(Array.isArray(categories) && categories.length){
+            categories.forEach(category => fetchAndBuildSections(category))
+        }
+        // console.log(categories);
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(err))
+}
+
+function fetchAndBuildSections(item){
+    console.log(item);
 }
 
 
