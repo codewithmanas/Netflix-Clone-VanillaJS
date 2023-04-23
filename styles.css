@@ -75,6 +75,21 @@ header {
     width: 40px;
 }
 
+.movies-cont {
+    margin: 0 auto 0 40px;
+}
+
+.movies-row {
+    display: flex;
+    width: 1080px;
+    overflow-x: scroll;
+}
+
+.movies-row img {
+    width: 200px;
+}
+
+
 
 /* RESPONSIVE CSS */
 
