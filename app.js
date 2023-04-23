@@ -1,24 +1,21 @@
 // constants
 const apiKey = "f4ab855768919f903a1dbec7381fa877";
 const apiEndPoint = "https://api.themoviedb.org/3";
-const apiCallUrl = `${apiEndPoint}/trending/all/day?api_key=${apiKey}`;
+const imgPath = "https://image.tmdb.org/t/p/original";
 
 const apiPaths = {
     fetchAllTrendingMovies: `${apiEndPoint}/trending/movie/day?api_key=${apiKey}`,
     fetchAllCategories: `${apiEndPoint}/genre/movie/list?api_key=${apiKey}`,
+    fetchMoviesList: (id) => `${apiEndPoint}/discover/movie?api_key=${apiKey}&with_genres=${id}`,
+    searchOnYoutube: (query) => `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=AIzaSyC0SZJkHFX-fQ7NrsxdI4l4mGwYuY4l7P8`
 }
 
 
 // Boot up the app
 function init() {
-
     fetchAndBuildAllSections();
 }
 
-// function buildAllTrendingMoviesSection(data){
-//         const movieSection = document.querySelector(".movie-section");
-//         movieSection.innerHTML = data.results[0].title;
-// }
 
 function fetchAndBuildAllSections(){
     fetch(apiPaths.fetchAllCategories)
@@ -26,15 +23,50 @@ function fetchAndBuildAllSections(){
     .then(data => {
         const categories = data.genres;
         if(Array.isArray(categories) && categories.length){
-            categories.forEach(category => fetchAndBuildSections(category))
+            categories.slice(0, 2).forEach(category => {
+                fetchAndBuildMovieSections(apiPaths.fetchMoviesList(category.id), category.name);
+            })
         }
-        // console.log(categories);
     })
     .catch(err => console.error(err))
 }
 
-function fetchAndBuildSections(item){
-    console.log(item);
+function fetchAndBuildMovieSections(fetchUrl, categoryName){
+    // console.log(fetchUrl);
+    fetch(fetchUrl)
+    .then(res => res.json())
+    .then(data => {
+        // console.log(data.results)
+        const movies = data.results;
+        if(Array.isArray(movies) && movies.length){
+            buildMoviesSection(movies, categoryName);
+        }
+    })
+    .catch(err => console.error(err))
+}
+
+function buildMoviesSection(movies, categoryName){
+        console.log(movies, categoryName);
+
+        const moviesCont = document.getElementById("movies-cont");
+
+        const moviesListHTML = movies.map(item => {
+            return `
+            <img class="movies-item" src="${imgPath}${item.backdrop_path}" alt="${item.title}">
+            `
+        }).join("");
+
+        const moviesSectionHTML = `
+        <div class="movies-section">
+            <h2 class="movies-section-heading">${categoryName}</h2>
+            <div class="movies-row">
+                ${moviesListHTML}
+            </div>
+
+        </div>
+        `;
+        moviesCont.innerHTML = moviesSectionHTML
+        console.log(moviesSectionHTML);
 }
 
 
