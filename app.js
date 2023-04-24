@@ -23,7 +23,7 @@ function fetchAndBuildAllSections(){
     .then(data => {
         const categories = data.genres;
         if(Array.isArray(categories) && categories.length){
-            categories.slice(0, 2).forEach(category => {
+            categories.slice(0, 5).forEach(category => {
                 fetchAndBuildMovieSections(apiPaths.fetchMoviesList(category.id), category.name);
             })
         }
@@ -57,16 +57,18 @@ function buildMoviesSection(movies, categoryName){
         }).join("");
 
         const moviesSectionHTML = `
-        <div class="movies-section">
-            <h2 class="movies-section-heading">${categoryName}</h2>
+            <h2 class="movies-section-heading">${categoryName} <span class="explore-nudge">Explore All</span></h2>
             <div class="movies-row">
                 ${moviesListHTML}
             </div>
-
-        </div>
         `;
-        moviesCont.innerHTML = moviesSectionHTML
-        console.log(moviesSectionHTML);
+
+        const div = document.createElement("div");
+        div.className = "movies-section";
+        div.innerHTML = moviesSectionHTML
+        
+        // append html into movies container
+        moviesCont.append(div);
 }
 
 
