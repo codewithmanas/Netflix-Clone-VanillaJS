@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
-/* font-family: 'Open Sans', sans-serif; */
 
 * {
     margin: 0;
@@ -11,6 +10,24 @@
 :root {
     --netflix-color: #DF0712;
 }
+
+/* scrollbar hide */
+@-moz-document url-prefix() { /* Disable scrollbar Firefox */
+    html{
+      scrollbar-width: none
+    }
+  }
+  body {
+    margin: 0; /* remove default margin */
+    scrollbar-width: none; /* Also needed to disable scrollbar Firefox */
+    -ms-overflow-style: none;  /* Disable scrollbar IE 10+ */
+    overflow-y: scroll;
+  }
+  body::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* Disable scrollbar Chrome/Safari/Webkit */
+  }
+
 
 /* resets */
 ul {
@@ -79,10 +96,20 @@ header {
     margin: 0 auto 0 40px;
 }
 
+.explore-nudge{
+    color: #54b9c5;
+    font-size: 12px;
+    display: none;
+}
+.movies-section-heading:hover .explore-nudge{
+    display: inline-block;
+}
+
 .movies-row {
     display: flex;
-    width: 1080px;
+    width: 90%;
     overflow-x: scroll;
+    flex-wrap: nowrap;
 }
 
 .movies-row img {
